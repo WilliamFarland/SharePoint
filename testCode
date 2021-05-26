@@ -20,7 +20,7 @@ $tenantId = "7bd08b0b-3395-4dc1-94bb-d0b2e56a497f" #you can use https://gitlab.c
 #title        ==> The display name, don't change this later or the folder will be synced twice
 #syncUrl      ==> the ODOpen URL, get it with Edge or Chrome when clicking on the Sync button of your library. If this does not show an URL, use Internet Explorer
 $listOfLibrariesToAutoMount = @(
-    @{"siteTitle" = "TestCalendarTeams";"listTitle"="Documents";"syncUrl" = "tenantId=7bd08b0b%2D3395%2D4dc1%2D94bb%2Dd0b2e56a497f&siteId=%7B%7D&webId=%7B%7D&listId=%7B%7D&webUrl=https%3A%2F%2Fumass%2Esharepoint%2Ecom%2Fsites%2FTestCalendarTeams&version=1"}
+    @{"siteTitle" = "TestCalendarTeams";"listTitle"="General";"syncUrl" = "tenantId=7bd08b0b%2D3395%2D4dc1%2D94bb%2Dd0b2e56a497f&siteId=%7B%7D&webId=%7B%7D&listId=%7B%7D&webUrl=https%3A%2F%2Fumass%2Esharepoint%2Ecom%2Fsites%2FTestCalendarTeams&version=1"}
 )
 
 <#example config if you only want to sync Onedrive
