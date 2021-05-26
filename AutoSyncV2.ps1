@@ -11,10 +11,6 @@ $listOfLibrariesToAutoMount = @(
     @{"siteTitle" = "TestCalendarTeams";"listTitle"="Documents";"syncUrl" = "tenantId=7bd08b0b%2D3395%2D4dc1%2D94bb%2Dd0b2e56a497f&siteId=%7B%7D&webId=%7B%7D&listId=%7B%7D&webUrl=https%3A%2F%2Fumass%2Esharepoint%2Ecom%2Fsites%2FTestCalendarTeams&version=1"}
 )
 
-
-
-$scriptPath = $PSCommandPath
-
 #Wait until Onedrive client is running, and has been running for at least 3 seconds
 while($true){
     try{
