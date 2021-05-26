@@ -11,17 +11,6 @@ $listOfLibrariesToAutoMount = @(
     @{"siteTitle" = "TestCalendarTeams";"listTitle"="Documents";"syncUrl" = "tenantId=7bd08b0b%2D3395%2D4dc1%2D94bb%2Dd0b2e56a497f&siteId=%7B%7D&webId=%7B%7D&listId=%7B%7D&webUrl=https%3A%2F%2Fumass%2Esharepoint%2Ecom%2Fsites%2FTestCalendarTeams&version=1"}
 )
 
-#translate any urls that were created with IE
-for($i=0;$i -lt $listOfLibrariesToAutoMount.Count;$i++){
-    if($listOfLibrariesToAutoMount[$i].syncUrl.StartsWith("odopen")){
-        $components = $listOfLibrariesToAutoMount[$i].syncUrl.Split("?")[1].Split("&")
-        $translatedUrl = "tenantId=$tenantId&$($components | where{$_.StartsWith("siteId")})&$($components | where{$_.StartsWith("webId")})&$($components | where{$_.StartsWith("listId")})&$($components | where{$_.StartsWith("webUrl")})"
-        if($($components | where{$_.StartsWith("folderId")}).Length -gt 1){
-            $translatedUrl = "$($translatedUrl)&$($components | where{$_.StartsWith("folderId")})"
-        }
-        $listOfLibrariesToAutoMount[$i].syncUrl = $translatedUrl
-    }
-}
 
 
 $scriptPath = $PSCommandPath
