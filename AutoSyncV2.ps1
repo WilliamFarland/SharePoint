@@ -1,4 +1,4 @@
-﻿#Module name:      Invoke-O4BAutoMount
+#Module name:      Invoke-O4BAutoMount
 #Author:           Jos Lieben
 #Author Blog:      http://www.lieben.nu
 #Date:             18-06-2019
@@ -26,52 +26,6 @@ $listOfLibrariesToAutoMount = @(
 <#example config if you only want to sync Onedrive
 $listOfLibrariesToAutoMount = @()
 #>
-
-#The following folders will be redirected using native windows Folder Redirection
-#knownFolderInternalName          ==> choose from: 'AdminTools','ApplicationData','CDBurning','CommonAdminTools','CommonApplicationData','CommonDesktopDirectory','CommonDocuments','CommonMusic','CommonOemLinks','CommonPictures','CommonProgramFiles','CommonProgramFilesX86','CommonPrograms','CommonStartMenu','CommonStartup','CommonTemplates','CommonVideos','Cookies','Downloads','Desktop','DesktopDirectory','Favorites','Fonts','History','InternetCache','LocalApplicationData','LocalizedResources','MyComputer','MyDocuments','MyMusic','MyPictures','MyVideos','NetworkShortcuts','Personal','PrinterShortcuts','ProgramFiles','ProgramFilesX86','Programs','Recent','Resources','SendTo','StartMenu','Startup','System','SystemX86','Templates','UserProfile','Windows'
-#knownFolderInternalIdentifier    ==> choose from: 'AddNewPrograms', 'AdminTools', 'AppUpdates', 'CDBurning', 'ChangeRemovePrograms', 'CommonAdminTools', 'CommonOEMLinks', 'CommonPrograms','CommonStartMenu', 'CommonStartup', 'CommonTemplates', 'ComputerFolder', 'ConflictFolder', 'ConnectionsFolder', 'Contacts', 'ControlPanelFolder', 'Cookies', 'Desktop', 'Documents', 'Downloads', 'Favorites', 'Fonts', 'Games', 'GameTasks', 'History', 'InternetCache', 'InternetFolder', 'Links', 'LocalAppData', 'LocalAppDataLow', 'LocalizedResourcesDir', 'Music', 'NetHood', 'NetworkFolder', 'OriginalImages', 'PhotoAlbums', 'Pictures', 'Playlists', 'PrintersFolder', 'PrintHood', 'Profile', 'ProgramData', 'ProgramFiles', 'ProgramFilesX64', 'ProgramFilesX86', 'ProgramFilesCommon', 'ProgramFilesCommonX64', 'ProgramFilesCommonX86', 'Programs', 'Public', 'PublicDesktop', 'PublicDocuments', 'PublicDownloads', 'PublicGameTasks', 'PublicMusic', 'PublicPictures', 'PublicVideos', 'QuickLaunch', 'Recent', 'RecycleBinFolder', 'ResourceDir', 'RoamingAppData', 'SampleMusic', 'SamplePictures', 'SamplePlaylists', 'SampleVideos', 'SavedGames', 'SavedSearches', 'SEARCH_CSC', 'SEARCH_MAPI', 'SearchHome', 'SendTo', 'SidebarDefaultParts', 'SidebarParts', 'StartMenu', 'Startup', 'SyncManagerFolder', 'SyncResultsFolder', 'SyncSetupFolder', 'System', 'SystemX86', 'Templates', 'TreeProperties', 'UserProfiles', 'UsersFiles', 'Videos', 'Windows'
-#targetPath                       ==> you can choose a subfolder (or subfolder path) to redirect to in the targetted location, you can use any Powershell variable here as wells
-#copyExistingFiles                ==> Set to $True if you want the script to try to copy any existing files that are found when redirecting
-#setEnvironmentVariable           ==> Set to $True if you want the script to register a %ENV% type variable with Windows to point to the new location. knowFolderInternalName will be the name of the variable (e.g. Desktop would become %desktop%)
-#targetLocation                   ==> Set to "onedrive" or to the INDEX of the library you wish to redirect to (ie, the first entry of listOfLibrariesToAutoMount would be 0)
-
-if(!$Env:USERPROFILE.EndsWith("system32\config\systemprofile")){$upn = $(whoami /upn)}
-
-$listOfFoldersToRedirect = @(
-    @{"knownFolderInternalName" = "Desktop"; "knownFolderInternalIdentifier" = "Desktop"; "targetPath" = "\Desktop"; "targetLocation" = "onedrive"; "copyExistingFiles" = $True; "setEnvironmentVariable" = $True},
-    @{"knownFolderInternalName" = "MyDocuments"; "knownFolderInternalIdentifier" = "Documents"; "targetPath" = "\My Documents"; "targetLocation" = "onedrive"; "copyExistingFiles" = $True; "setEnvironmentVariable" = $True},
-    @{"knownFolderInternalName" = "MyPictures"; "knownFolderInternalIdentifier" = "Pictures"; "targetPath" = "\$upn\All team pictures"; "targetLocation" = "0"; "copyExistingFiles" = $True; "setEnvironmentVariable" = $True}#note that the last entry does NOT end with a comma
-)
-
-<#Example without any redirection:
-$listOfFoldersToRedirect = @()
-#>
-
-#The following folders will be redirected using hard junctions. Use these to include specifc appdata subfolders into roaming locations or for folders that can't be redirected with the previous method. If paths don't exist, they will be automatically created
-#originalLocation   ==> you can use variables or hardcoded paths here, this location will be redirected using a hard link, any existing content will be removed (but first copied if you set copyExistingFiles)
-#targetPath         ==> you can choose a subfolder (or subfolder path) to redirect to in the targetted location
-#targetLocation     ==> Set to "onedrive" or to the INDEX of the library you wish to redirect to (ie, the first entry of listOfLibrariesToAutoMount would be 0)
-#hide               ==> Set to $True if you don't want this folder to be visible to the user in the target location
-#copyExistingFiles  ==> Set to $True if you want the script to try to copy any existing files that are found when redirecting
-
-$listOfOtherFoldersToRedirect = @(
-    @{"originalLocation" = "$($Env:APPDATA)\Skype"; "targetPath" = "\Appdata\Skype"; "targetLocation" = "onedrive"; "hide" = $True; "copyExistingFiles" = $True}
-)
-
-########################################################################
-##END OF CONFIGURATION SECTION, DO NOT CHANGE ANYTHING BELOW THIS LINE##
-########################################################################
-
-$LogPath = $($env:temp) + "\Invoke-O4BAutoMount.log"
-Start-Transcript $LogPath
-
-if($Env:USERPROFILE.EndsWith("system32\config\systemprofile")){
-    $runningAsSystem = $True
-    Write-Output "Running as SYSTEM"
-}else{
-    $runningAsSystem = $False
-    Write-Output "Running as $($env:USERNAME)"
-}
 
 #translate any urls that were created with IE
 for($i=0;$i -lt $listOfLibrariesToAutoMount.Count;$i++){
