@@ -67,6 +67,8 @@ $userEmail = $Null
             if($value -like "*$compositeTitle"){
                 Write-Output "$compositeTitle is already syncing, skipping :)"
                 continue libraries
+            }else{
+                Write-Output "Not already syncing"
             }
         }
     }
