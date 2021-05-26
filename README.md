@@ -3,6 +3,9 @@ Auto Sync Shared Libraries to file explorer
 
 Status: Currently not working, 403 error when trying to access SharePoint API
 
+Install SharePoint Powershell Module first by running this command:
+Install-Module -Name Microsoft.Online.SharePoint.PowerShell
+
 Files: 
 1) Get information script - Created to extract necessary info for full URL which is needed to access SharePoint API
 2) SharePoint Migration - Does the actual migration
