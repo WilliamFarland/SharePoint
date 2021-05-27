@@ -1,5 +1,3 @@
-
-
 $autoRerunMinutes = 0 #If set to 0, only runs at logon, else, runs every X minutes AND at logon, expect random delays of up to 5 minutes due to bandwidth, service availability, local resources etc. I strongly recommend 0 or >60 as input value to avoid being throttled
 $visibleToUser = $False #if set to true, user will see 
 $tenantId = "7bd08b0b-3395-4dc1-94bb-d0b2e56a497f" #you can use https://gitlab.com/Lieben/assortedFunctions/blob/master/get-tenantIdFromLogin.ps1 to get your tenant ID
@@ -8,7 +6,8 @@ $tenantId = "7bd08b0b-3395-4dc1-94bb-d0b2e56a497f" #you can use https://gitlab.c
 #title        ==> The display name, don't change this later or the folder will be synced twice
 #syncUrl      ==> the ODOpen URL, get it with Edge or Chrome when clicking on the Sync button of your library. If this does not show an URL, use Internet Explorer
 $listOfLibrariesToAutoMount = @(
-    @{"siteTitle" = "TestCalendarTeams";"listTitle"="Documents";"syncUrl" = "tenantId=7bd08b0b%2D3395%2D4dc1%2D94bb%2Dd0b2e56a497f&siteId=%7B%7D&webId=%7B%7D&listId=%7B%7D&webUrl=https%3A%2F%2Fumass%2Esharepoint%2Ecom%2Fsites%2FTestCalendarTeams&version=1"}
+    @{"siteTitle" = "TestCalendarTeams";"listTitle"="Documents";"syncUrl" = "tenantID=7bd08b0b-3395-4dc1-94bb-d0b2e56a497f&siteId=%7B4fdc90bb-a5bb-452a-8bf7-96bab5406a83%7D&webId=%7B9f16abda-7d49-497c-bd60-b94608796523%7D&webTitle=TestCalendarTeams&listId=%7BFF3DBCB1-45BA-4171-BF23-DC517E41A847%7D&listTitle=Documents&userEmail=wfarland%40umass.edu&listTemplateTypeId=101&webUrl=https%3A%2F%2Fumass.sharepoint.com%2Fsites%2FTestCalendarTeams&webLogoUrl=_layouts%2F15%2Fimages%2Fsiteicon.png&webTemplate=64&isSiteAdmin=0
+"}
 )
 
 #Wait until Onedrive client is running, and has been running for at least 3 seconds
